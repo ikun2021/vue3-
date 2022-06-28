@@ -10,10 +10,15 @@
     <div id="app"></div>
 
     <template id = "my-app">
-     <h2>{{message}}</h2>
-     <h2>{{counter * 10}}</h2>
-     <h2>{{isTrue ? "哈哈哈" : ""}}</h2>
-     <button @click = "toggle">切换</button>
+     <h2>{{counter}}</h2>
+
+     <div v-once>
+        <h2>{{counter}}</h2>
+        <h2>{{message}}</h2>
+     </div>
+    
+
+     <button @click = "increment"></button>
     </template>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -22,19 +27,14 @@
             template: '#my-app',
             data(){
                 return {
-                    message:"hello world1",
-                    isTrue: true,
-                    counter:10
+                    message:"hello world",
+                    counter:100
                 }
             },
 
             methods:{
-                getMessage(){
-                    return this.message
-                },
-
-                toggle(){
-                    this.isTtue = !this.isTtue;
+                increment(){
+                    this.counter++;
                 }
             }
         }

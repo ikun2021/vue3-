@@ -10,31 +10,19 @@
     <div id="app"></div>
 
     <template id = "my-app">
+
      <h2>{{message}}</h2>
-     <h2>{{counter * 10}}</h2>
-     <h2>{{isTrue ? "哈哈哈" : ""}}</h2>
-     <button @click = "toggle">切换</button>
+     <!--更新元素的text content-->
+     <h2 v-text="message"></h2>
     </template>
 
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         const App = {
-            template: '#my-app',
+            template: "#my-app",
             data(){
                 return {
-                    message:"hello world1",
-                    isTrue: true,
-                    counter:10
-                }
-            },
-
-            methods:{
-                getMessage(){
-                    return this.message
-                },
-
-                toggle(){
-                    this.isTtue = !this.isTtue;
+                    message:"hello world"
                 }
             }
         }

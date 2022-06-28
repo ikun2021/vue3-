@@ -11,9 +11,8 @@
 
     <template id = "my-app">
      <h2>{{message}}</h2>
-     <h2>{{counter * 10}}</h2>
-     <h2>{{isTrue ? "哈哈哈" : ""}}</h2>
-     <button @click = "toggle">切换</button>
+     <!--v-html vue帮忙渲染html-->
+     <div v-html="message"></div>
     </template>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -22,19 +21,7 @@
             template: '#my-app',
             data(){
                 return {
-                    message:"hello world1",
-                    isTrue: true,
-                    counter:10
-                }
-            },
-
-            methods:{
-                getMessage(){
-                    return this.message
-                },
-
-                toggle(){
-                    this.isTtue = !this.isTtue;
+                    message:'<span style="color:red"> hahaha </span>'
                 }
             }
         }
