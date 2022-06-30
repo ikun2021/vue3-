@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <template id = "my-app">
+        <!--=号后面的方法名加不加（）？ 如果该方法不需要额外参数，方法后可以不加（）  -->
+        <button @click="btnClick()">button 1</button>
+        <button @click="btnClick">button 1</button>
+        <button @mousemove="btnClick">button 1</button>
+        <!--inline statement 绑定内联表达式-->
+        <button @click="counter++">{{counter}}</button>
+        <!--绑定多个事件时  绑定一个对象-->
+        <button v-on="{click:btnClick, mousemove:btnClick}">button 1</button>
+        <!--传递多个参数  $event获取事件发生时的时间对象 -->
+        <button @click="btn3Click($event,'tom',18)">button 1</button>
+
+        <!--.STOP阻止冒泡-->
+        <div @click = 'btnClick'>
+            <button @click = 'btn2Click'>按钮2</button>
+        </div>
+
+        <div @click = 'btnClick'>
+            <button @click.stop = 'btn2Click'>按钮3</button>
+        </div>
+
+        <!--键盘抬起-enter建抬起-->
+        <input type="text" @keyup.enter="enterKeyup">
+
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const App = {
+            template: '#my-app',
+            data(){
+                return {
+                    message:"hello world",
+                    counter:100
+
+                }
+            },
+
+            methods:{
+                enterKeyup(event){
+                    console.log("enterKeyup:" + event.target.value);
+                },
+                btnClick(event){//自动传递过来的event对象，默认不写btmClick（）
+                    console.log("click button 1");
+                },
+                btn2Click(event){//自动传递过来的event对象，默认不写btmClick（）
+                    console.log("click button 2");
+                },
+                btn3Click(event,name,age){//事件传来除event对象外的其他参数
+                    console.log(name);
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html> 

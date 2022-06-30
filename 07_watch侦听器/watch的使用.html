@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <template id = "my-app">
+     你的问题：<input type="text" v-model="question">
+     <button @click="answer">查看答案</button>
+     <button @click="changeInfoName">改变名字</button>
+    </template>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const App = {
+            template: '#my-app',
+            data(){
+                return {
+                    question:"hello world",
+
+                    info:{
+                        name:"why",
+                        age:18,
+                        sex:"male"
+                    }
+
+                }
+            },
+
+            methods:{
+                answer(){
+                    console.log("answer!");
+                },
+
+                changeInfoName(){
+                    this.info.name = "kobe";
+                }
+            },
+
+            watch:{
+                //侦听data中属性的名称  后面跟函数
+                //默认情况下，侦听器只会侦听question的修改，如果只是修改question内部的某个值，不能被侦听   
+                //变化后的值，变化前的值
+                info(newValue,oldValue){
+                    console.log("newValue",newValue,"oldValue",oldValue);
+                },
+
+                ////深度侦听  后面跟对象,而不是function   配置deep:true
+                info:{
+                    handler:function(newInfo,oldInfo){
+                        console.log("newInfo",newInfo,"oldInfo",oldInfo);
+                    },
+                    deep:true, //配置深度侦听
+                    immediate: true,     //立即执行一次侦听器 不管是否发生改变
+                },
+
+                //侦听data对象中的某个属性
+                "info.name":function(newName,OldName){
+                },
+            },
+
+            //生命周期中的监听
+            created(){
+                this.$watch("info",function(newInfo,oldInfo){
+
+                },{
+                    deep:true,
+                    immediate:true
+                })
+
+                //unwatch()
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html> 

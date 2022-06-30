@@ -55,6 +55,13 @@
         <!-- 数组语法 多个对象合并到一起--> 
         <div :style="[{},{},{}]">csscsscsscss</div>
 
+
+ <!--5.v-bind 绑定的属性名称不固定时 用【】括起来--动态绑定属性名称  自定义组件--> 
+        <div :[propertyKey]="propertyValue">呵呵哈哈哈</div>
+ 
+ <!--6.v-bind 绑定一个对象  用来封装自己的高级组件 -->        
+        <div v-bind="classObj">呵呵哈哈哈</div>
+        
     </template>
 
     <script src="https://unpkg.com/vue@next"></script>
@@ -63,6 +70,8 @@
             template: '#my-app',
             data(){
                 return {
+                    propertyKey:"class",
+                    propertyValue:"active",
                     isActive:true,
                     isTitle:true,
                     imgUrl:"",
